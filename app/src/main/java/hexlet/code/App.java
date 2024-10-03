@@ -5,11 +5,16 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 
@@ -28,17 +33,37 @@ class App implements Callable<String> {
 
     @Override
     public String call() throws Exception { // your business logic goes here...
-        readfile(filePath1, filePath2);
+        //readfile(filePath1, filePath2);
+        parse(filePath1, filePath2);
         return null;
     }
 
-    public void readfile(String ... filepath) {
+    /*
+
+    private void readfile(String ... filepath) {
         var filepaths = List.of(filepath);
         filepaths.forEach((value) -> {
             Path path = Paths.get(value).toAbsolutePath().normalize();
             try {
                 System.out.println(Files.readString(path));
             } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+     */
+
+    public static void parse(String ... filePath) throws Exception {
+        var filePaths = List.of(filePath);
+
+        filePaths.forEach((value) -> {
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File(value);
+            try {
+                HashMap<String, String> server = objectMapper.readValue(file, Server.class);
+                System.out.println(server);
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
