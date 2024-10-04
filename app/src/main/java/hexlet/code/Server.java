@@ -1,13 +1,15 @@
 package hexlet.code;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashMap;
 
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class Server extends HashMap<String, String> {
+public class Server {
     private String host;
     private String proxy;
     private int timeout;
