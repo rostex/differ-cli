@@ -8,12 +8,6 @@ import picocli.CommandLine.Parameters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
@@ -33,8 +27,8 @@ class App implements Callable<String> {
 
     @Override
     public String call() throws Exception { // your business logic goes here...
-        //readfile(filePath1, filePath2);
-        parse(filePath1, filePath2);
+        System.out.println(JsonParse.getDiff(getData(filePath1), getData(filePath2)));
+        //System.out.println(getData(filePath1));
         return null;
     }
 
@@ -54,19 +48,25 @@ class App implements Callable<String> {
 
      */
 
-    public static void parse(String ... filePath) throws Exception {
-        var filePaths = List.of(filePath);
+//    public static void getData(String ... filePath) throws Exception {
+//        var filePaths = List.of(filePath);
+//
+//        filePaths.forEach((value) -> {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        File file = new File(value);
+//            try {
+//                Map<String, String> = objectMapper.readValue(file, Server.class);
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+//    }
 
-        filePaths.forEach((value) -> {
+    public static Map getData(String filePath) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File(value);
-            try {
-                HashMap<String, String> server = objectMapper.readValue(file, Server.class);
-                System.out.println(server);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        File file = new File(filePath);
+        return objectMapper.readValue(file, Map.class);
+
     }
 
 
