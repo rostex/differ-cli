@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
 }
 
 group = 'ru.rostex'
@@ -32,6 +33,7 @@ application {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 compileJava {
