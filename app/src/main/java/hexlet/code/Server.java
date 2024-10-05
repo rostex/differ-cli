@@ -1,8 +1,12 @@
 package hexlet.code;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
-import java.util.HashMap;
+
 
 @ToString
 @NoArgsConstructor
