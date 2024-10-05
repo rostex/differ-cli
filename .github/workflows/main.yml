@@ -15,9 +15,12 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
       - uses: gradle/actions/setup-gradle@v4
-      - working-directory: ./app
-      - run: ./gradlew checkstyleMain
-      - run: ./gradlew test
+      - name: Run linter
+        working-directory: ./app
+        run: ./gradlew checkstyleMain
+      - name: Run test
+        working-directory: ./app
+        run: ./gradlew test
       # - name: Publish code coverage
       #   uses: paambaati/codeclimate-action@v9.0.0
       #   env:
