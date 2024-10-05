@@ -1,10 +1,12 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
 import java.util.Map;
 
 public class JsonParse {
 
-    public static String getDiff(Map<String, ?> content1, Map<String, ?> content2) {
+    public static String getDiff(Map<String, Object> content1, Map<String, Object> content2) {
         StringBuilder result = new StringBuilder();
 
         var sortedContent1 = content1.entrySet().stream()
@@ -23,13 +25,11 @@ public class JsonParse {
 
             if (!content2.containsKey(key)) {
                 result.append("- ").append(key).append(": ").append(value1).append("\n");
+            } else if (!value1.equals(value2)) {
+                result.append("- ").append(key).append(": ").append(value1).append("\n");
+                result.append("+ ").append(key).append(": ").append(value2).append("\n");
             } else {
-                if (!value1.equals(value2)) {
-                    result.append("- ").append(key).append(": ").append(value1).append("\n");
-                    result.append("+ ").append(key).append(": ").append(value2).append("\n");
-                } else {
-                    result.append("  ").append(key).append(": ").append(value1).append("\n");
-                }
+                result.append("  ").append(key).append(": ").append(value1).append("\n");
             }
         }
 
@@ -41,6 +41,13 @@ public class JsonParse {
         }
         result.append("}");
         return result.toString();
+    }
+
+    public static Map getData(String filePath) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File(filePath);
+        return objectMapper.readValue(file, Map.class);
+
     }
 }
 
