@@ -1,0 +1,3 @@
+version: 5
+client: macOS
+application: JsonDiff

@@ -1,0 +1,4 @@
+client: windows
+open-source: true
+version: 2
+application: JsonDiff
