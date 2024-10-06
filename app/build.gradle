@@ -31,9 +31,15 @@ application {
     mainClass = 'hexlet.code.App'
 }
 
+/*
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+}
+*/
+
+jacocoTestReport {
+    dependsOn test
 }
 
 compileJava {
