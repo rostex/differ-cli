@@ -1,6 +1,8 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+
 import java.io.File;
 import java.util.Map;
 
@@ -44,10 +46,20 @@ public class JsonParse {
     }
 
     public static Map getData(String filePath) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File(filePath);
-        return objectMapper.readValue(file, Map.class);
+        int indexOfDoT = filePath.indexOf(".");
+        var fileFormat = filePath.substring(indexOfDoT + 1);
+
+        if (fileFormat.equals("yml") || fileFormat.equals("yaml")) {
+            YAMLMapper yamlMapper = new YAMLMapper();
+            File file = new File(filePath);
+            return yamlMapper.readValue(file, Map.class);
+        } else {
+            ObjectMapper objectMapper = new ObjectMapper();
+            File file = new File(filePath);
+            return objectMapper.readValue(file, Map.class);
+        }
 
     }
+
 }
 
