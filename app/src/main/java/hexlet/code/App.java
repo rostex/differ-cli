@@ -24,7 +24,7 @@ class App implements Callable<String> {
 
     @Override
     public String call() throws Exception { // your business logic goes here...
-        System.out.println(JsonParse.getDiff(getData(filePath1), getData(filePath2)));
+        System.out.println(Formatter.stylish(JsonParse.getDiff(getData(filePath1), getData(filePath2))));
         return null;
     }
 
