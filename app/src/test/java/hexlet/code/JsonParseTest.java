@@ -32,29 +32,31 @@ public class JsonParseTest {
         content3.put("setting2", 200);
         content3.put("setting3", true);
         content3.put("key1", "value1");
-        //content3.put("numbers1", [1, 2, 3, 4]);
-        //content3.put("numbers2", [2, 3, 4, 5]);
+        content3.put("numbers1", new Integer[]{1, 2, 3, 4});
+        content3.put("numbers2",  new Integer[]{2, 3, 4, 5});
         content3.put("id", null);
         content3.put("default", false);
         content3.put("checked", 45);
-        //content3.put("numbers3", [3, 4, 5]);
-        //content3.put("chars1", ["a", "b", "c"]);
-        //content3.put("chars2", ["d", "e", "f"]);
+        content3.put("numbers3",  new Integer[]{3, 4, 5});
+        content3.put("chars1",  new String[]{"a", "b", "c"});
+        content3.put("chars2",  new String[]{"d", "e", "f"});
 
         content4.put("setting1", "Another value");
         content4.put("setting2", 300);
         content4.put("setting3", "none");
         content4.put("key2", "value2");
-        //content4.put("numbers1", [1, 2, 3, 4]);
-        //content4.put("numbers2", [22, 33, 44, 55]);
+        content4.put("numbers1", new Integer[]{1, 2, 3, 4});
+        content4.put("numbers2", new Integer[]{22, 33, 44, 55});
         content4.put("id", null);
-        //content4.put("default", ["value1", "value2"]);
+        content4.put("default", new String[]{"value1", "value2"});
         content4.put("checked", true);
-        //content4.put("numbers4", [4, 5, 6]);
-        //content4.put("chars1", ["a", "b", "c"]);
+        content4.put("numbers4", new Integer[]{4, 5, 6});
+        content4.put("chars1", new String[]{"a", "b", "c"});
         content4.put("chars2", false);
-        //content4.put("obj1", {"nestedKey": "value", "isNested": true}
-
+        content4.put("obj1", new HashMap<String, Object>() {{
+            put("nestedKey", "value");
+            put("isNested", true);
+        }});
     }
 
     @Test
