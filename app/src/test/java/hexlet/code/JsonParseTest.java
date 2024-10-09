@@ -69,7 +69,7 @@ public class JsonParseTest {
                         + "+ version: 5"
                         + "\n"
                         + "}",
-                JsonParse.getDiff(content1, content2));
+                Differ.getDiff(content1, content2));
 
     }
 
@@ -102,7 +102,7 @@ public class JsonParseTest {
                         + "+ setting3: none"
                         + "\n"
                         + "}",
-                JsonParse.getDiff(content3, content4));
+                Differ.getDiff(content3, content4));
 
     }
 }
