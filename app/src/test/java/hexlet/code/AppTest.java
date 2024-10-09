@@ -2,7 +2,7 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
-import static hexlet.code.JsonParse.getData;
+import static hexlet.code.Differ.getData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
@@ -24,7 +24,7 @@ public class AppTest {
                         + "+ version: 5"
                         + "\n"
                         + "}",
-                JsonParse.getDiff(getData(fileJsonPath1), getData(fileJsonPath2)));
+                Differ.getDiff(getData(fileJsonPath1), getData(fileJsonPath2)));
 
     }
 
@@ -40,7 +40,7 @@ public class AppTest {
                         + "+ version: 5"
                         + "\n"
                         + "}",
-                JsonParse.getDiff(getData(fileYamlPath1), getData(fileYamlPath2)));
+                Differ.getDiff(getData(fileYamlPath1), getData(fileYamlPath2)));
 
     }
 }
