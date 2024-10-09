@@ -13,7 +13,6 @@ public class Data {
     private Object value1;
     private Object value2;
     private Status status;
-    private List<Data> dataList;
 
     public Data(String key, Object value1, Object value2, Status status) {
         this.key = key;
@@ -21,16 +20,6 @@ public class Data {
         this.value2 = value2;
         this.status = status;
     }
-
-    public Data() {
-        this.dataList = new ArrayList<>();
-    }
-
-
-    public void addData(Data content) {
-        dataList.add(content);
-    }
-
 
     enum Status {
         UNCHANGED,
