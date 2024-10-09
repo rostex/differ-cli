@@ -6,7 +6,6 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import java.util.concurrent.Callable;
-import static hexlet.code.JsonParse.getData;
 
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 0.1",
@@ -24,7 +23,7 @@ class App implements Callable<String> {
 
     @Override
     public String call() throws Exception { // your business logic goes here...
-        System.out.println(Formatter.stylish(JsonParse.getDiff(getData(filePath1), getData(filePath2))));
+        System.out.println(Differ.generate(filePath1, filePath2, format));
         return null;
     }
 
