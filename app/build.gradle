@@ -32,17 +32,17 @@ application {
     mainClass = 'hexlet.code.App'
 }
 
-/*
-test {
-    useJUnitPlatform()
-    finalizedBy jacocoTestReport
-}
-*/
-
-jacocoTestReport {
-    dependsOn test
-}
-
 compileJava {
     options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+}
+
+tasks.test {
+    useJUnitPlatform()
+
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
