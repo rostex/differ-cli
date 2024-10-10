@@ -22,23 +22,12 @@ jobs:
         working-directory: ./app
         run: ./gradlew test
 
-  coverage:
-    name: "Test Coverage"
-    runs-on: "ubuntu-latest"
-    if: ${{ github.event_name == 'push' }} # Publish coverage only for push commits, not PRs.
-    steps:
-    - name: checkout code
-      uses: actions/checkout@v4
-
-    - name: run tests and instrument coverage
-      working-directory: ./app
-      run: make report
-
-    - name: publish code coverage to code-climate (duh)
-      uses: paambaati/codeclimate-action@v8.0.0
-      env:
-        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-      with:
-        debug: true
-        coverageLocations: |
-          ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@v9.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          JACOCO_SOURCE_PATH: app/src/main/java
+        with:
+          workingDirectory: ./app
+          coverageCommand: make report
+          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
