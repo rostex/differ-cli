@@ -6,16 +6,18 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import java.io.File;
 import java.util.*;
 
-
 public class Differ {
 
-    public static List<Data> data = new ArrayList<>();
+
 
     public static String generate(String filePath1, String filePath2, String format) throws Exception {
         String result;
         switch (format) {
             case "plain":
                 result = Formatter.plain(Differ.getDiff(getData(filePath1), getData(filePath2)));
+                break;
+            case "json":
+                result = Formatter.json(Differ.getDiff(getData(filePath1), getData(filePath2)));
                 break;
             default:
                 result = Formatter.stylish(Differ.getDiff(getData(filePath1), getData(filePath2)));
@@ -25,6 +27,7 @@ public class Differ {
     }
 
     public static List<Data> getDiff(Map<String, Object> content1, Map<String, Object> content2) {
+        List<Data> data = new ArrayList<>();
         Set<String> sortedKeys = new TreeSet<>();
         sortedKeys.addAll(content1.keySet());
         sortedKeys.addAll(content2.keySet());
@@ -38,17 +41,12 @@ public class Differ {
                 data.add(new Data(key, null, value2, Data.Status.ADDED));
             } else if (!content2.containsKey(key)) {
                 data.add(new Data(key, value1, null, Data.Status.REMOVED));
-            } else if (value1 == null && value2 != null) {
-                data.add(new Data(key, null, value2, Data.Status.UPDATED));
-            } else if (value1 != null && value2 == null) {
-                data.add(new Data(key, value1, null, Data.Status.UPDATED));
-            } else if (value1 != null && value2 != null && !value1.equals(value2)) {
+            } else if (!getEqualsData(value1, value2)) {
                 data.add(new Data(key, value1, value2, Data.Status.UPDATED));
             } else {
                 data.add(new Data(key, value1, value2, Data.Status.UNCHANGED));
             }
         }
-
         return data;
     }
 
@@ -72,6 +70,10 @@ public class Differ {
         return filePath.substring(indexOfDoT + 1);
     }
 
-
+    private static boolean getEqualsData(Object value1, Object value2) {
+        if (value1 == null || value2 == null) {
+            return value1 == value2;
+        }
+            return value1.equals(value2);
+    }
 }
-
