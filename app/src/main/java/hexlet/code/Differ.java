@@ -4,10 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.io.File;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Differ {
-
 
 
     public static String generate(String filePath1, String filePath2, String format) throws Exception {
@@ -74,6 +77,6 @@ public class Differ {
         if (value1 == null || value2 == null) {
             return value1 == value2;
         }
-            return value1.equals(value2);
+        return value1.equals(value2);
     }
 }

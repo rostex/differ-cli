@@ -5,7 +5,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+
 
 public class Formatter {
 
@@ -74,7 +76,7 @@ public class Formatter {
         if (value instanceof String) {
             return "'" + value + "'";
         }
-        if (value instanceof Iterable<?> || value instanceof Map<?,?>) {
+        if (value instanceof Iterable<?> || value instanceof Map<?, ?>) {
             return "[complex value]";
         }
         return String.valueOf(value);
