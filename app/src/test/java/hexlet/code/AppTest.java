@@ -24,7 +24,7 @@ public class AppTest {
                         + "+ version: 5"
                         + "\n"
                         + "}",
-                Differ.getDiff(getData(fileJsonPath1), getData(fileJsonPath2)));
+                Differ.generate(fileJsonPath1, fileJsonPath2, "stylish"));
 
     }
 
@@ -40,7 +40,7 @@ public class AppTest {
                         + "+ version: 5"
                         + "\n"
                         + "}",
-                Differ.getDiff(getData(fileYamlPath1), getData(fileYamlPath2)));
+                Differ.generate(fileYamlPath1, fileYamlPath2, "stylish"));
 
     }
 }
