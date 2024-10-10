@@ -1,6 +1,10 @@
 package hexlet.code;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import java.util.*;
 
 public class Formatter {
@@ -29,11 +33,11 @@ public class Formatter {
                     result.append("+ ").append(data.getKey())
                             .append(": ").append(data.getValue2()).append("\n");
                     break;
+                default:
+                    break;
             }
         }
-
         result.append("}");
-
         return result.toString();
     }
 
@@ -41,28 +45,39 @@ public class Formatter {
         StringBuilder result = new StringBuilder();
 
         for (var data : dataList) {
-
-            //var value1 = data.getValue1() instanceof Object  ? "[complex value]" : data.getValue1();
-            //var value2 = data.getValue2() instanceof Object ? "[complex value]" : data.getValue2();
-
             switch (data.getStatus()) {
                 case ADDED:
-                    result.append("Property ").append(data.getKey())
-                            .append(" was added with value: ").append(data.getValue2()).append("\n");
+                    result.append("Property '").append(data.getKey())
+                            .append("' was added with value: ").append(checkValue(data.getValue2())).append("\n");
                     break;
                 case REMOVED:
-                    result.append("Property ").append(data.getKey())
-                            .append(" was removed").append("\n");
+                    result.append("Property '").append(data.getKey())
+                            .append("' was removed").append("\n");
                     break;
                 case UPDATED:
-                    result.append("Property ").append(data.getKey())
-                            .append(" was updated. From ").append(data.getValue1())
-                            .append(" to ").append(data.getValue2()).append("\n");
+                    result.append("Property '").append(data.getKey())
+                            .append("' was updated. From ").append(checkValue(data.getValue1()))
+                            .append(" to ").append(checkValue(data.getValue2())).append("\n");
+                    break;
+                default:
                     break;
             }
         }
-
         return result.toString();
+    }
+
+    public static String json(List<Data> dataList) throws JsonProcessingException {
+        return new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValueAsString(dataList);
+    }
+
+    private static String checkValue(Object value) {
+        if (value instanceof String) {
+            return "'" + value + "'";
+        }
+        if (value instanceof Iterable<?> || value instanceof Map<?,?>) {
+            return "[complex value]";
+        }
+        return String.valueOf(value);
     }
 
 }
