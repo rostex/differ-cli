@@ -52,9 +52,9 @@ public class JsonParseTest {
         content4.put("chars1", new String[]{"a", "b", "c"});
         content4.put("chars2", false);
         content4.put("obj1", new HashMap<String, Object>() {{
-            put("nestedKey", "value");
-            put("isNested", true);
-        }});
+                put("nestedKey", "value");
+                put("isNested", true);
+            }});
     }
 
     @Test
