@@ -68,7 +68,7 @@ public class Differ {
 
     }
 
-    private static String getFileFormat(String filePath) {
+    public static String getFileFormat(String filePath) {
         int indexOfDoT = filePath.lastIndexOf(".");
         return filePath.substring(indexOfDoT + 1);
     }
