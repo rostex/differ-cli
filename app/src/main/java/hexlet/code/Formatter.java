@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
 import java.util.Map;
 
-
 public class Formatter {
 
     public static String stylish(List<Data> dataList) {
@@ -72,11 +71,12 @@ public class Formatter {
         return new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValueAsString(dataList);
     }
 
-    private static String checkValue(Object value) {
+    public static String checkValue(Object value) {
         if (value instanceof String) {
             return "'" + value + "'";
         }
-        if (value instanceof Iterable<?> || value instanceof Map<?, ?>) {
+        if (value instanceof Iterable<?> || value instanceof Map<?, ?>
+                || value instanceof Integer[] || value instanceof String[]) {
             return "[complex value]";
         }
         return String.valueOf(value);
