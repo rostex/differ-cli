@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import static hexlet.code.Differ.getFileFormat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JsonParseTest {
+public class DifferTest {
     Map<String, Object> content1 = new HashMap<>();
     Map<String, Object> content2 = new HashMap<>();
 
@@ -52,9 +53,9 @@ public class JsonParseTest {
         content4.put("chars1", new String[]{"a", "b", "c"});
         content4.put("chars2", false);
         content4.put("obj1", new HashMap<String, Object>() {{
-                put("nestedKey", "value");
-                put("isNested", true);
-            }});
+            put("nestedKey", "value");
+            put("isNested", true);
+        }});
     }
 
     @Test
@@ -74,38 +75,44 @@ public class JsonParseTest {
     }
 
     /*
-    @Test
-    public void testGetDiffMulti() {
-        assertEquals("{"
-                        + "\n"
-                        + "chars1: [a, b, c]" + "\n"
-                        + "- chars2: [d, e, f]" + "\n"
-                        + "+ chars2: false" + "\n"
-                        + "- checked: false" + "\n"
-                        + "+ checked: true" + "\n"
-                        + "- default: null" + "\n"
-                        + "+ default: [value1, value2]" + "\n"
-                        + "- id: 45" + "\n"
-                        + "+ id: null" + "\n"
-                        + "- key1: value1" + "\n"
-                        + "+ key2: value2" + "\n"
-                        + "numbers1: [1, 2, 3, 4]" + "\n"
-                        + "- numbers2: [2, 3, 4, 5]" + "\n"
-                        + "+ numbers2: [22, 33, 44, 55]" + "\n"
-                        + "- numbers3: [3, 4, 5]" + "\n"
-                        + "+ numbers4: [4, 5, 6]" + "\n"
-                        + "+ obj1: {nestedKey=value, isNested=true}" + "\n"
-                        + "- setting1: Some value" + "\n"
-                        + "+ setting1: Another value" + "\n"
-                        + "- setting2: 200" + "\n"
-                        + "+ setting2: 300" + "\n"
-                        + "- setting3: true" + "\n"
-                        + "+ setting3: none"
-                        + "\n"
-                        + "}",
-                Formatter.stylish(Differ.getDiff(content3, content4)));
+        @Test
+        public void testGetDiffMulti() {
+            assertEquals("{"
+                            + "\n"
+                            + "chars1: [a, b, c]" + "\n"
+                            + "- chars2: [d, e, f]" + "\n"
+                            + "+ chars2: false" + "\n"
+                            + "- checked: false" + "\n"
+                            + "+ checked: true" + "\n"
+                            + "- default: null" + "\n"
+                            + "+ default: [value1, value2]" + "\n"
+                            + "- id: 45" + "\n"
+                            + "+ id: null" + "\n"
+                            + "- key1: value1" + "\n"
+                            + "+ key2: value2" + "\n"
+                            + "numbers1: [1, 2, 3, 4]" + "\n"
+                            + "- numbers2: [2, 3, 4, 5]" + "\n"
+                            + "+ numbers2: [22, 33, 44, 55]" + "\n"
+                            + "- numbers3: [3, 4, 5]" + "\n"
+                            + "+ numbers4: [4, 5, 6]" + "\n"
+                            + "+ obj1: {nestedKey=value, isNested=true}" + "\n"
+                            + "- setting1: Some value" + "\n"
+                            + "+ setting1: Another value" + "\n"
+                            + "- setting2: 200" + "\n"
+                            + "+ setting2: 300" + "\n"
+                            + "- setting3: true" + "\n"
+                            + "+ setting3: none"
+                            + "\n"
+                            + "}",
+                    Formatter.stylish(Differ.getDiff(content3, content4)));
 
+        }
+    */
+
+    @Test
+    public void getFileFormatTest() {
+        assertEquals("yml", getFileFormat("file1.yml"));
+        assertEquals("json", getFileFormat("file1.my-lib.2024.json"));
     }
 
-     */
 }
