@@ -2,7 +2,6 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
-import static hexlet.code.Differ.getData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {

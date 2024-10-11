@@ -1,6 +1,6 @@
 package hexlet.code;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,13 +31,13 @@ public class JsonParseTest {
         content3.put("setting3", true);
         content3.put("key1", "value1");
         content3.put("numbers1", new Integer[]{1, 2, 3, 4});
-        content3.put("numbers2",  new Integer[]{2, 3, 4, 5});
+        content3.put("numbers2", new Integer[]{2, 3, 4, 5});
         content3.put("id", null);
         content3.put("default", false);
         content3.put("checked", 45);
-        content3.put("numbers3",  new Integer[]{3, 4, 5});
-        content3.put("chars1",  new String[]{"a", "b", "c"});
-        content3.put("chars2",  new String[]{"d", "e", "f"});
+        content3.put("numbers3", new Integer[]{3, 4, 5});
+        content3.put("chars1", new String[]{"a", "b", "c"});
+        content3.put("chars2", new String[]{"d", "e", "f"});
 
         content4.put("setting1", "Another value");
         content4.put("setting2", 300);
