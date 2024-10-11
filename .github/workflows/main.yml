@@ -18,6 +18,7 @@ jobs:
       
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
+        working-directory: ./app
         
       - name: Run linter
         run: ./gradlew checkstyleMain
