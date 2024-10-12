@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import static hexlet.code.Data.Status.*;
 import static hexlet.code.Differ.getFileFormat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -67,10 +66,10 @@ public class DifferTest {
                 put("isNested", true);
             }});
 */
-        expected.add(new Data("application", "JsonDiff", "JsonDiff", UNCHANGED));
-        expected.add(new Data("client", "windows", "macOS", UPDATED));
-        expected.add(new Data("open-source", true, null, REMOVED));
-        expected.add(new Data("version", 2, 5, UPDATED));
+        expected.add(new Data("application", "JsonDiff", "JsonDiff", Data.Status.UNCHANGED));
+        expected.add(new Data("client", "windows", "macOS", Data.Status.UPDATED));
+        expected.add(new Data("open-source", true, null, Data.Status.REMOVED));
+        expected.add(new Data("version", 2, 5, Data.Status.UPDATED));
     }
 
     @Test
