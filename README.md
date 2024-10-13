@@ -33,13 +33,13 @@ Property 'group2' was removed
 ### Demonstrarion:
 
 Get differences from json and yaml files in stylish format:
-[![asciicast](https://asciinema.org/a/9TKawZQV5rNY7LAUGj3vhpI1Q.svg)](https://asciinema.org/a/9TKawZQV5rNY7LAUGj3vhpI1Q)
+[![asciicast](https://asciinema.org/a/LjrKKjkPsFNmcMc6GKhHEceTZ.svg)](https://asciinema.org/a/LjrKKjkPsFNmcMc6GKhHEceTZ)
 
 Get differences from files in plain format:
-[![asciicast](https://asciinema.org/a/TsMdJV0bJQwWcDCZeQnfrLEgG.svg)](https://asciinema.org/a/TsMdJV0bJQwWcDCZeQnfrLEgG)
+[![asciicast](https://asciinema.org/a/d9URN0jdw0vFRL1BflgYRDVEe.svg)](https://asciinema.org/a/d9URN0jdw0vFRL1BflgYRDVEe)
 
 Get differences from files in json format:
-[![asciicast](https://asciinema.org/a/Gw65HK5cUoAsaeVBd3bQSxsJz.svg)](https://asciinema.org/a/Gw65HK5cUoAsaeVBd3bQSxsJz)
+[![asciicast](https://asciinema.org/a/COO1q9RnqotXtwKpsQ6U8zSTP.svg)](https://asciinema.org/a/COO1q9RnqotXtwKpsQ6U8zSTP)
 
 
 
