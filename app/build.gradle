@@ -24,8 +24,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.34'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+    //testCompileOnly 'org.projectlombok:lombok:1.18.34'
+    //testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 }
 
 application {
@@ -33,15 +33,17 @@ application {
 }
 
 compileJava {
-    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+    //options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
     options.release = 21
 }
 
-tasks.test {
+test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
-tasks.jacocoTestReport {
+jacocoTestReport {
+    dependsOn test
     reports {
         xml.required = true
     }
