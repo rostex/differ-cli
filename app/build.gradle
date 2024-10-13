@@ -34,11 +34,11 @@ application {
 
 compileJava {
     options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+    options.release = 21
 }
 
 tasks.test {
     useJUnitPlatform()
-
 }
 
 tasks.jacocoTestReport {
