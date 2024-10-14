@@ -29,6 +29,10 @@ public class Differ {
         return result;
     }
 
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        return generate(filePath1, filePath2, "stylish");
+    }
+
     public static List<Data> getDiff(Map<String, Object> content1, Map<String, Object> content2) {
         List<Data> data = new ArrayList<>();
         Set<String> sortedKeys = new TreeSet<>();
