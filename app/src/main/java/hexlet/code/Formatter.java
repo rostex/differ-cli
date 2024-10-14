@@ -64,7 +64,7 @@ public class Formatter {
                     break;
             }
         }
-        return result.toString();
+        return result.toString().trim();
     }
 
     public static String json(List<Data> dataList) throws JsonProcessingException {
