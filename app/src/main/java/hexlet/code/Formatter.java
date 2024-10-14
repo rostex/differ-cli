@@ -17,21 +17,21 @@ public class Formatter {
         for (var data : dataList) {
             switch (data.getStatus()) {
                 case UNCHANGED:
-                    result.append("  ").append(data.getKey())
+                    result.append("   ").append(data.getKey())
                             .append(": ").append(data.getValue1()).append("\n");
                     break;
                 case ADDED:
-                    result.append("+ ").append(data.getKey())
+                    result.append(" + ").append(data.getKey())
                             .append(": ").append(data.getValue2()).append("\n");
                     break;
                 case REMOVED:
-                    result.append("- ").append(data.getKey())
+                    result.append(" - ").append(data.getKey())
                             .append(": ").append(data.getValue1()).append("\n");
                     break;
                 case UPDATED:
-                    result.append("- ").append(data.getKey())
+                    result.append(" - ").append(data.getKey())
                             .append(": ").append(data.getValue1()).append("\n");
-                    result.append("+ ").append(data.getKey())
+                    result.append(" + ").append(data.getKey())
                             .append(": ").append(data.getValue2()).append("\n");
                     break;
                 default:
