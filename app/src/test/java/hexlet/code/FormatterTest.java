@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FormatterTest {
     private String content1;
-    private Integer[] content2;
+    private String[] content2;
     private Map<String, Object> content3 = new HashMap<>();
 
     @BeforeEach
     public void beforeEach() {
         content1 = "value";
-        content2 = new Integer[]{4, 5, 6};
+        content2 = new String[]{"a", "b", "c"};
         content3.put("nestedKey", "value");
         content3.put("isNested", true);
     }
