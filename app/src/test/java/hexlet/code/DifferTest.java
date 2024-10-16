@@ -23,7 +23,7 @@ public class DifferTest {
     private static String readFixture(String fileName) throws Exception {
         return Files.readString(Path.of(fileName));
     }
-    
+
     private void assertStringsEquals(String value1, String value2) {
         assertEquals(value1.replaceAll("\r", ""), value2.replaceAll("\r", ""));
     }
