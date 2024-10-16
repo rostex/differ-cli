@@ -19,8 +19,8 @@ jobs:
           gradle-version: 8.8
           arguments: build
           build-root-directory: app
-      - run: ./gradlew checkstyleMain
-      - run: ./gradlew test
+      # - run: ./gradlew checkstyleMain
+      # - run: ./gradlew test
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v9.0.0
         env:
