@@ -2,6 +2,10 @@ package hexlet.code;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import hexlet.code.formatter.Format;
+import hexlet.code.formatter.Formatter;
+import static hexlet.code.formatter.Format.STYLISH;
+
 
 import java.io.File;
 import java.util.List;
@@ -13,24 +17,16 @@ import java.util.TreeSet;
 public class Differ {
 
 
-    public static String generate(String filePath1, String filePath2, String format) throws Exception {
-        String result;
-        switch (format) {
-            case "plain":
-                result = Formatter.plain(Differ.getDiff(getData(filePath1), getData(filePath2)));
-                break;
-            case "json":
-                result = Formatter.json(Differ.getDiff(getData(filePath1), getData(filePath2)));
-                break;
-            default:
-                result = Formatter.stylish(Differ.getDiff(getData(filePath1), getData(filePath2)));
-                break;
-        }
-        return result;
+    public static String generate(String filePath1, String filePath2, Format format) throws Exception {
+        var content1 = getData(filePath1);
+        var content2 = getData(filePath2);
+        var dataList = Differ.getDiff(content1, content2);
+
+        return Formatter.format(dataList, format);
     }
 
     public static String generate(String filePath1, String filePath2) throws Exception {
-        return generate(filePath1, filePath2, "stylish");
+        return generate(filePath1, filePath2, STYLISH);
     }
 
     public static List<Data> getDiff(Map<String, Object> content1, Map<String, Object> content2) {
