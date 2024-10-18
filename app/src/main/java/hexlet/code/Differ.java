@@ -2,11 +2,7 @@ package hexlet.code;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import hexlet.code.formatter.Format;
 import hexlet.code.formatter.Formatter;
-import static hexlet.code.formatter.Format.STYLISH;
-
-
 import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
@@ -17,7 +13,7 @@ import java.util.TreeSet;
 public class Differ {
 
 
-    public static String generate(String filePath1, String filePath2, Format format) throws Exception {
+    public static String generate(String filePath1, String filePath2, String format) throws Exception {
         var content1 = getData(filePath1);
         var content2 = getData(filePath2);
         var dataList = Differ.getDiff(content1, content2);
@@ -26,7 +22,7 @@ public class Differ {
     }
 
     public static String generate(String filePath1, String filePath2) throws Exception {
-        return generate(filePath1, filePath2, STYLISH);
+        return generate(filePath1, filePath2, "stylish");
     }
 
     public static List<Data> getDiff(Map<String, Object> content1, Map<String, Object> content2) {
