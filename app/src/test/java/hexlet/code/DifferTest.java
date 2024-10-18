@@ -2,10 +2,7 @@ package hexlet.code;
 
 import static hexlet.code.Differ.getFileFormat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import hexlet.code.formatter.Format;
 import org.junit.jupiter.api.Test;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -46,42 +43,42 @@ public class DifferTest {
     @Test
     public void testJsonToStylishDifferGenerate() throws Exception {
         var expected = readFixture(expectedStylishFile);
-        var actual = Differ.generate(jsonFile1, jsonFile2, Format.STYLISH);
+        var actual = Differ.generate(jsonFile1, jsonFile2, "stylish");
         assertStringsEquals(expected, actual);
     }
 
     @Test
     public void testYamlToStylishDifferGenerate() throws Exception {
         var expected = readFixture(expectedStylishFile);
-        var actual = Differ.generate(yamlFile1, yamlFile2, Format.STYLISH);
+        var actual = Differ.generate(yamlFile1, yamlFile2, "stylish");
         assertStringsEquals(expected, actual);
     }
 
     @Test
     public void testJsonToPlainDifferGenerate() throws Exception {
         var expected = readFixture(expectedPlainFile);
-        var actual = Differ.generate(jsonFile1, jsonFile2, Format.PLAIN);
+        var actual = Differ.generate(jsonFile1, jsonFile2, "plain");
         assertStringsEquals(expected, actual);
     }
 
     @Test
     public void testYamlToPlainDifferGenerate() throws Exception {
         var expected = readFixture(expectedPlainFile);
-        var actual = Differ.generate(yamlFile1, yamlFile2, Format.PLAIN);
+        var actual = Differ.generate(yamlFile1, yamlFile2, "plain");
         assertStringsEquals(expected, actual);
     }
 
     @Test
     public void testJsonToJsonDifferGenerate() throws Exception {
         var expected = readFixture(expectedJsonFile);
-        var actual = Differ.generate(jsonFile1, jsonFile2, Format.JSON);
+        var actual = Differ.generate(jsonFile1, jsonFile2, "json");
         assertStringsEquals(expected, actual);
     }
 
     @Test
     public void testYamlToJsonDifferGenerate() throws Exception {
         var expected = readFixture(expectedJsonFile);
-        var actual = Differ.generate(yamlFile1, yamlFile2, Format.JSON);
+        var actual = Differ.generate(yamlFile1, yamlFile2, "json");
         assertStringsEquals(expected, actual);
     }
 
