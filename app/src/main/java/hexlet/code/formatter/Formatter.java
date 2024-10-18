@@ -7,16 +7,13 @@ import java.util.Map;
 
 public class Formatter {
 
-    public static String format(List<Data> dataList, Format format) throws Exception {
+    public static String format(List<Data> dataList, String format) throws Exception {
         return switch (format) {
-            case STYLISH -> Stylish.format(dataList);
-            case PLAIN -> Plain.format(dataList);
-            case JSON -> Json.format(dataList);
+            case "stylish" -> Stylish.format(dataList);
+            case "plain" -> Plain.format(dataList);
+            case "json" -> Json.format(dataList);
+            default -> throw new Exception("Unexpected format: " + format);
         };
-    }
-
-    public static Format formatConverter(String stringFormat) {
-        return Format.valueOf(stringFormat.toUpperCase());
     }
 
     public static String checkValue(Object value) {
