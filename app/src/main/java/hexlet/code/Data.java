@@ -22,7 +22,7 @@ public class Data {
         this.status = status;
     }
 
-    enum Status {
+    public enum Status {
         UNCHANGED,
         ADDED,
         REMOVED,
