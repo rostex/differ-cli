@@ -9,9 +9,9 @@ public class Formatter {
 
     public static String format(List<Data> dataList, String format) throws Exception {
         return switch (format) {
-            case "stylish" -> Stylish.format(dataList);
-            case "plain" -> Plain.format(dataList);
-            case "json" -> Json.format(dataList);
+            case Format.STYLISH -> Stylish.format(dataList);
+            case Format.PLAIN -> Plain.format(dataList);
+            case Format.JSON -> Json.format(dataList);
             default -> throw new Exception("Unexpected format: " + format);
         };
     }
