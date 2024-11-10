@@ -1,28 +1,28 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import hexlet.code.formatter.Formatter;
+import hexlet.code.formatter.Extension;
+import hexlet.code.formatter.Format;
+import hexlet.code.exceptions.UnsupportedFileFormatException;
+
 import java.io.File;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.io.IOException;
+import java.util.*;
 
 public class Differ {
 
-
-    public static String generate(String filePath1, String filePath2, String format) throws Exception {
-        var content1 = getData(filePath1);
-        var content2 = getData(filePath2);
+    public static String generateDiff(String filePath1, String filePath2, Format formatType) throws Exception {
+        var content1 = getDataFromFile(filePath1);
+        var content2 = getDataFromFile(filePath2);
         var dataList = Differ.getDiff(content1, content2);
 
-        return Formatter.format(dataList, format);
+        return formatType.getFormat(dataList);
     }
 
-    public static String generate(String filePath1, String filePath2) throws Exception {
-        return generate(filePath1, filePath2, "stylish");
+    public static String generateDiff(String filePath1, String filePath2) throws Exception {
+        return generateDiff(filePath1, filePath2, Format.STYLISH);
     }
 
     public static List<Data> getDiff(Map<String, Object> content1, Map<String, Object> content2) {
@@ -31,10 +31,19 @@ public class Differ {
         sortedKeys.addAll(content1.keySet());
         sortedKeys.addAll(content2.keySet());
 
-
         for (var key : sortedKeys) {
             var value1 = content1.get(key);
             var value2 = content2.get(key);
+
+            // This is a small working workaround: if value is an empty string, we convert it to null.
+            // This happens because empty XML tags (like <key/>) are deserialized as empty strings,
+            // but we want to treat them as null in the diffing process.
+            if (value1 != null && value1.equals("")) {
+                value1 = null;
+            }
+            if (value2 != null && value2.equals("")) {
+                value2 = null;
+            }
 
             if (!content1.containsKey(key)) {
                 data.add(new Data(key, null, value2, Data.Status.ADDED));
@@ -49,24 +58,46 @@ public class Differ {
         return data;
     }
 
-    public static Map getData(String filePath) throws Exception {
+    public static Map getDataFromFile(String filePath) throws UnsupportedFileFormatException, IOException {
+        String fileExtension = getFileExtension(filePath);
         File file = new File(filePath);
         YAMLMapper yamlMapper = new YAMLMapper();
         ObjectMapper objectMapper = new ObjectMapper();
+        XmlMapper xmlMapper = new XmlMapper();
 
-        if (getFileFormat(filePath).equals("yml") || getFileFormat(filePath).equals("yaml")) {
-            return yamlMapper.readValue(file, Map.class);
-        } else if (getFileFormat(filePath).equals("json")) {
-            return objectMapper.readValue(file, Map.class);
-        } else {
-            throw new Exception(filePath + " format is not supported");
+        switch (fileExtension) {
+            case "yml":
+            case "yaml":
+                return yamlMapper.readValue(file, Map.class);
+            case "json":
+                return objectMapper.readValue(file, Map.class);
+            case "xml":
+                return xmlMapper.readValue(file, Map.class);
+            default:
+                throw new UnsupportedFileFormatException(filePath);
         }
-
     }
 
-    public static String getFileFormat(String filePath) {
-        int indexOfDoT = filePath.lastIndexOf(".");
-        return filePath.substring(indexOfDoT + 1);
+    public static String getFileExtension(String fileName) throws UnsupportedFileFormatException {
+        int indexOfDoT = fileName.lastIndexOf(".");
+        if (indexOfDoT == -1) {
+            throw new UnsupportedFileFormatException(fileName);
+        }
+
+        String extension = fileName.substring(indexOfDoT + 1);
+
+        boolean validExtension = false;
+        for (Extension ext : Extension.values()) {
+            if (ext.toString().equals(extension)) {
+                validExtension = true;
+                break;
+            }
+        }
+
+        if (!validExtension) {
+            throw new UnsupportedFileFormatException(fileName);
+        }
+        return extension;
     }
 
     private static boolean getEqualsData(Object value1, Object value2) {
