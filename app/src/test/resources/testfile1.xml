@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <setting1>Some value</setting1>
+    <setting2>200</setting2>
+    <setting3>true</setting3>
+    <key1>value1</key1>
+    <numbers1>1</numbers1>
+    <numbers1>2</numbers1>
+    <numbers1>3</numbers1>
+    <numbers1>4</numbers1>
+    <numbers2>2</numbers2>
+    <numbers2>3</numbers2>
+    <numbers2>4</numbers2>
+    <numbers2>5</numbers2>
+    <id>45</id>
+    <default />
+    <checked>false</checked>
+    <numbers3>3</numbers3>
+    <numbers3>4</numbers3>
+    <numbers3>5</numbers3>
+    <chars1>a</chars1>
+    <chars1>b</chars1>
+    <chars1>c</chars1>
+    <chars2>d</chars2>
+    <chars2>e</chars2>
+    <chars2>f</chars2>
+</root>
