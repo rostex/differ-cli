@@ -9,8 +9,9 @@ import picocli.CommandLine.Parameters;
 import java.util.concurrent.Callable;
 
 
-@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 0.8",
-        description = "Compares two configuration files and shows a difference.")
+@Command(name = "getdiff", mixinStandardHelpOptions = true, version = "getdiff 1.0.0",
+        description = "Compares two configuration files and shows a difference.\n"
+                + "Available extensions: yml, json, xml.")
 class App implements Callable<Integer> {
 
     @Parameters(index = "0", description = "Path to first file")
@@ -19,13 +20,13 @@ class App implements Callable<Integer> {
     @Parameters(index = "1", description = "Path to second file")
     private String filePath2;
 
-    @Option(names = {"-f", "--format"}, description = "Output getStylishFormat."
-            + " Available: stylish, plain, json [Default: stylish]")
-    private Format defualtFormat = Format.STYLISH;
+    @Option(names = {"-f", "--format"}, description = "Output format."
+            + " Available: stylish [default], plain, json.")
+    private Format formatType = Format.STYLISH;
 
     @Override
     public Integer call() throws Exception {
-        System.out.println(Differ.generateDiff(filePath1, filePath2, defualtFormat));
+        System.out.println(Differ.generateDiff(filePath1, filePath2, formatType));
         return 0;
     }
 
