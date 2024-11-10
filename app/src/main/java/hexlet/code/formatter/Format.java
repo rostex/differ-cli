@@ -1,7 +1,42 @@
 package hexlet.code.formatter;
 
-public class Format {
-    public static final String STYLISH = "stylish";
-    public static final String PLAIN = "plain";
-    public static final String JSON = "json";
+import com.fasterxml.jackson.core.JsonProcessingException;
+import hexlet.code.Data;
+
+import java.util.List;
+import java.util.Map;
+
+public enum Format {
+
+    JSON("json") {
+        @Override
+        public String getFormat(List<Data> dataList) throws JsonProcessingException {
+            return Json.getJsonFormat(dataList);
+        }
+    },
+    PLAIN("plain") {
+        @Override
+        public String getFormat(List<Data> dataList) {
+            return Plain.getPlainFormat(dataList);
+        }
+    },
+    STYLISH("stylish") {
+        @Override
+        public String getFormat(List<Data> dataList) {
+            return Stylish.getStylishFormat(dataList);
+        }
+    };
+
+    private final String format;
+
+    Format(String format) {
+        this.format = format;
+    }
+
+    public abstract String getFormat(List<Data> dataList) throws JsonProcessingException;
+
+    @Override
+    public String toString() {
+        return format;
+    }
 }

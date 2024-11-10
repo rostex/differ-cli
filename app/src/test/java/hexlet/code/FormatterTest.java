@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static hexlet.code.formatter.Formatter.checkValue;
+import static hexlet.code.formatter.Plain.checkValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FormatterTest {

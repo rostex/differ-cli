@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.formatter.Format;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -13,22 +14,22 @@ import java.util.concurrent.Callable;
 class App implements Callable<Integer> {
 
     @Parameters(index = "0", description = "Path to first file")
-    private static String filePath1;
+    private String filePath1;
 
     @Parameters(index = "1", description = "Path to second file")
     private String filePath2;
 
-    @Option(names = {"-f", "--format"}, description = "Output format."
+    @Option(names = {"-f", "--format"}, description = "Output getStylishFormat."
             + " Available: stylish, plain, json [Default: stylish]")
-    private String format = "stylish";
+    private Format defualtFormat = Format.STYLISH;
 
     @Override
     public Integer call() throws Exception {
-        System.out.println(Differ.generate(filePath1, filePath2, format));
+        System.out.println(Differ.generateDiff(filePath1, filePath2, defualtFormat));
         return 0;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }
