@@ -8,9 +8,9 @@ import hexlet.code.Data;
 import java.util.List;
 
 public class Json {
-    private static final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     public static String getJsonFormat(List<Data> dataList) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(dataList);
+        return OBJECT_MAPPER.writeValueAsString(dataList);
     }
 }

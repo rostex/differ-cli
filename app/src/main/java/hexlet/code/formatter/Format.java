@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import hexlet.code.Data;
 
 import java.util.List;
-import java.util.Map;
 
 public enum Format {
 

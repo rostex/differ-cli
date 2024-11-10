@@ -24,6 +24,8 @@ public class Plain {
                     break;
                 case UNCHANGED:
                     break;
+                default:
+                    break;
             }
         }
         return result.toString().trim();
@@ -31,7 +33,9 @@ public class Plain {
 
 
     public static String checkValue(Object value) {
-        if (value == null) return "null";
+        if (value == null) {
+            return "null";
+        }
 
         return switch (value) {
             case String s -> "'" + s + "'";
