@@ -14,6 +14,8 @@ public class DifferTest {
     private String jsonFile2 = "src/test/resources/testfile2.json";
     private String yamlFile1 = "src/test/resources/testfile1.yml";
     private String yamlFile2 = "src/test/resources/testfile2.yml";
+    private String xmlFile1 = "src/test/resources/testfile1.yml";
+    private String xmlFile2 = "src/test/resources/testfile2.yml";
 
     private String expectedStylishFile = "src/test/resources/expected-stylish.txt";
     private String expectedPlainFile = "src/test/resources/expected-plain.txt";
@@ -43,6 +45,13 @@ public class DifferTest {
     }
 
     @Test
+    public void testXmlToDefaultDifferGenerate() throws Exception {
+        var expected = readFixture(expectedStylishFile);
+        var actual = Differ.generateDiff(xmlFile1, xmlFile2);
+        assertStringsEquals(expected, actual);
+    }
+
+    @Test
     public void testJsonToStylishDifferGenerate() throws Exception {
         var expected = readFixture(expectedStylishFile);
         var actual = Differ.generateDiff(jsonFile1, jsonFile2, Format.STYLISH);
@@ -53,6 +62,13 @@ public class DifferTest {
     public void testYamlToStylishDifferGenerate() throws Exception {
         var expected = readFixture(expectedStylishFile);
         var actual = Differ.generateDiff(yamlFile1, yamlFile2, Format.STYLISH);
+        assertStringsEquals(expected, actual);
+    }
+
+    @Test
+    public void testXmlToStylishDifferGenerate() throws Exception {
+        var expected = readFixture(expectedStylishFile);
+        var actual = Differ.generateDiff(xmlFile1, xmlFile2, Format.STYLISH);
         assertStringsEquals(expected, actual);
     }
 
@@ -71,6 +87,13 @@ public class DifferTest {
     }
 
     @Test
+    public void testXmlToPlainDifferGenerate() throws Exception {
+        var expected = readFixture(expectedPlainFile);
+        var actual = Differ.generateDiff(xmlFile1, xmlFile2, Format.PLAIN);
+        assertStringsEquals(expected, actual);
+    }
+
+    @Test
     public void testJsonToJsonDifferGenerate() throws Exception {
         var expected = readFixture(expectedJsonFile);
         var actual = Differ.generateDiff(jsonFile1, jsonFile2, Format.JSON);
@@ -81,6 +104,13 @@ public class DifferTest {
     public void testYamlToJsonDifferGenerate() throws Exception {
         var expected = readFixture(expectedJsonFile);
         var actual = Differ.generateDiff(yamlFile1, yamlFile2, Format.JSON);
+        assertStringsEquals(expected, actual);
+    }
+
+    @Test
+    public void testXmlToJsonDifferGenerate() throws Exception {
+        var expected = readFixture(expectedJsonFile);
+        var actual = Differ.generateDiff(xmlFile1, xmlFile2, Format.JSON);
         assertStringsEquals(expected, actual);
     }
 
