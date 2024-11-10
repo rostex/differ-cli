@@ -5,29 +5,29 @@ import hexlet.code.Data;
 import java.util.List;
 
 public class Stylish {
-    public static String format(List<Data> dataList) {
+    private static final String ADDED_SYMBOL = "+";
+    private static final String REMOVED_SYMBOL = "-";
+    private static final String UNCHANGED_SYMBOL = " ";
+
+    public static String getStylishFormat(List<Data> dataList) {
         StringBuilder result = new StringBuilder();
 
-        result.append("{").append("\n");
+        result.append("{")
+                .append("\n");
         for (var data : dataList) {
             switch (data.getStatus()) {
                 case UNCHANGED:
-                    result.append("    ").append(data.getKey())
-                            .append(": ").append(data.getValue1()).append("\n");
+                    appendLine(result, UNCHANGED_SYMBOL, data.getKey(), data.getValue1());
                     break;
                 case ADDED:
-                    result.append("  + ").append(data.getKey())
-                            .append(": ").append(data.getValue2()).append("\n");
+                    appendLine(result, ADDED_SYMBOL, data.getKey(), data.getValue2());
                     break;
                 case REMOVED:
-                    result.append("  - ").append(data.getKey())
-                            .append(": ").append(data.getValue1()).append("\n");
+                    appendLine(result, REMOVED_SYMBOL, data.getKey(), data.getValue1());
                     break;
                 case UPDATED:
-                    result.append("  - ").append(data.getKey())
-                            .append(": ").append(data.getValue1()).append("\n");
-                    result.append("  + ").append(data.getKey())
-                            .append(": ").append(data.getValue2()).append("\n");
+                    appendLine(result, REMOVED_SYMBOL, data.getKey(), data.getValue1());
+                    appendLine(result, ADDED_SYMBOL, data.getKey(), data.getValue2());
                     break;
                 default:
                     break;
@@ -35,5 +35,11 @@ public class Stylish {
         }
         result.append("}");
         return result.toString();
+    }
+
+    private static void appendLine(StringBuilder result, String symbol, String key, Object value) {
+        result.append("  ").append(symbol).append(" ")
+                .append(key).append(": ").append((value))
+                .append("\n");
     }
 }
