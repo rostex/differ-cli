@@ -22,8 +22,8 @@ Currently, the utility is designed to work with text-based formats. Binary files
   - [For Windows](#for-windows)
 - [Usage](#usage)
 - [Uninstallation](#uninstallation)
-  - [For macOS and Ubuntu (Linux)](#for-macos-and-ubuntu-linux)
-  - [For Windows](#for-windows)
+  - [For macOS and Ubuntu (Linux)](#uninstallation-mac-ubuntu)
+  - [For Windows](#uninstallation-windows)
 
 ## Installation
 
@@ -140,6 +140,7 @@ getdiff file1.json file2.json
 ```
 
 ## Uninstallation
+<a name="uninstallation-mac-ubuntu"></a>
 ### For **macOS** and **Ubuntu** (Linux)
 If you wish to uninstall Differ CLI, follow these steps:
 1. **Download the Uninstallation Script**: Download the uninstall script by running the following command in your terminal:
@@ -163,13 +164,14 @@ The script will:
 - Delete the ~/.getdiff directory.
 - Remove the installation directory from your PATH variable.
 
+<a name="uninstallation-windows"></a>
 ### For **Windows**
 If you wish to uninstall Differ CLI, follow these steps:
 1. **Download the Uninstallation Script**: Download the uninstallation script by running the following command in PowerShell:
 
-```powershell
-Invoke-WebRequest -Uri "https://github.com/rostex/differ-cli/releases/download/v1.0.0/uninstall-getdiff.ps1" -OutFile "$env:USERPROFILE\Downloads\uninstall-getdiff.ps1"
-```
+   ```powershell
+   Invoke-WebRequest -Uri "https://github.com/rostex/differ-cli/releases/download/v1.0.0/uninstall-getdiff.ps1" -OutFile     "$env:USERPROFILE\Downloads\uninstall-getdiff.ps1"
+   ```
 2. Run the script as Administrator, just like the installation:
 
    ```powershell
