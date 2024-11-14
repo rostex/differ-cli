@@ -8,13 +8,9 @@ import hexlet.code.formatter.Format;
 import hexlet.code.exceptions.UnsupportedFileFormatException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Map;
-
+import java.util.*;
 
 public class Differ {
 
@@ -64,45 +60,27 @@ public class Differ {
     }
 
     public static Map getDataFromFile(String filePath) throws UnsupportedFileFormatException, IOException {
-        String fileExtension = getFileExtension(filePath);
         File file = new File(filePath);
-        YAMLMapper yamlMapper = new YAMLMapper();
-        ObjectMapper objectMapper = new ObjectMapper();
-        XmlMapper xmlMapper = new XmlMapper();
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found: " + filePath);
+        }
+
+        String fileExtension = Extension.getFileExtension(filePath);
+        if (!Extension.isValidExtension(fileExtension)) {
+            throw new UnsupportedFileFormatException("Unsupported file format: " + fileExtension);
+        }
 
         switch (fileExtension) {
             case "yml":
             case "yaml":
-                return yamlMapper.readValue(file, Map.class);
+                parseYaml(file);
             case "json":
-                return objectMapper.readValue(file, Map.class);
+                parseJson(file);
             case "xml":
-                return xmlMapper.readValue(file, Map.class);
+                parseXml(file);
             default:
                 throw new UnsupportedFileFormatException(filePath);
         }
-    }
-
-    public static String getFileExtension(String fileName) throws UnsupportedFileFormatException {
-        int indexOfDoT = fileName.lastIndexOf(".");
-        if (indexOfDoT == -1) {
-            throw new UnsupportedFileFormatException(fileName);
-        }
-
-        String extension = fileName.substring(indexOfDoT + 1);
-
-        boolean validExtension = false;
-        for (Extension ext : Extension.values()) {
-            if (ext.toString().equals(extension)) {
-                validExtension = true;
-                break;
-            }
-        }
-
-        if (!validExtension) {
-            throw new UnsupportedFileFormatException(fileName);
-        }
-        return extension;
     }
 
     private static boolean getEqualsData(Object value1, Object value2) {
@@ -111,4 +89,20 @@ public class Differ {
         }
         return value1.equals(value2);
     }
+
+    public static Map<String, Object> parseYaml(File file) throws IOException {
+        YAMLMapper yamlMapper = new YAMLMapper();
+        return yamlMapper.readValue(file, Map.class);
+    }
+
+    public static Map<String, Object> parseJson(File file) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(file, Map.class);
+    }
+
+    private static Map<String, Object> parseXml(File file) throws IOException {
+        XmlMapper xmlMapper = new XmlMapper();
+        return xmlMapper.readValue(file, Map.class);
+    }
+
 }
