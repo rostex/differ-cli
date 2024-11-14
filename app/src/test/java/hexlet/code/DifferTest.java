@@ -1,8 +1,8 @@
 package hexlet.code;
 
-import static hexlet.code.Differ.getFileExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import hexlet.code.formatter.Extension;
 import hexlet.code.formatter.Format;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
@@ -116,8 +116,8 @@ public class DifferTest {
 
     @Test
     public void testGetFileFormat() throws Exception {
-        assertStringsEquals("yml", getFileExtension("file1.yml"));
-        assertStringsEquals("json", getFileExtension("file1.my-lib.2024.json"));
+        assertStringsEquals("yml", Extension.getFileExtension("file1.yml"));
+        assertStringsEquals("json", Extension.getFileExtension("file1.my-lib.2024.json"));
     }
 
 
